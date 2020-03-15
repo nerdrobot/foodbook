@@ -1,0 +1,11 @@
+<StackLayout *ngFor="let menu of menus">
+    <StackLayout *ngFor="let item of menu.items">
+        <CardView  (tap)="addToCart(item)" class="card" margin="10" elevation="40" radius="5">
+            <StackLayout class="card-layout">
+                <Label class="h2" [text]="item.name + '    ' + (item.price | currency)"></Label>
+            </StackLayout>
+        </CardView>
+    </StackLayout>
+</StackLayout>
+
+

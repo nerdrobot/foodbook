@@ -1,0 +1,42 @@
+<RadSideDrawer>
+    <FlexboxLayout tkDrawerContent class="drawer-container">
+        <Button
+                text="Home"
+                class="btn"
+                nsRouterLink="/home"
+                [clearHistory]="true"
+                (tap)="onLogout()"
+        ></Button>
+        <Button
+                text="Search Restaurants"
+                class="btn"
+                nsRouterLink="/searchRestaurant"
+                [clearHistory]="true"
+                (tap)="onLogout()"
+        ></Button>
+        <Button
+                text="Cart"
+                class="btn"
+                nsRouterLink="/cart"
+                [clearHistory]="true"
+                (tap)="onLogout()"
+        ></Button>
+        <Button
+                text="Logout"
+                class="btn"
+                nsRouterLink="/"
+                [clearHistory]="true"
+                (tap)="onLogout()"
+        ></Button>
+        <Button
+                text="Orders"
+                class="btn"
+                nsRouterLink="/order"
+                [clearHistory]="true"
+                (tap)="onLogout()"
+        ></Button>
+    </FlexboxLayout>
+    <StackLayout tkMainContent>
+        <page-router-outlet></page-router-outlet>
+    </StackLayout>
+</RadSideDrawer>

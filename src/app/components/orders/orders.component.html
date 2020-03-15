@@ -1,0 +1,10 @@
+<ns-action-bar title="Current Orders"></ns-action-bar>
+<StackLayout>
+    <StackLayout *ngFor="let order of orders">
+        <CardView class="card" margin="10" elevation="40" radius="5">
+            <StackLayout class="card-layout">
+                <Label class="h2" [text]="order.name"></Label>
+            </StackLayout>
+        </CardView>
+    </StackLayout>
+</StackLayout>

@@ -1,0 +1,8 @@
+<ns-action-bar title="Select a Restaurant"></ns-action-bar>
+<StackLayout>
+    <CardView *ngFor="let restaurant of restaurants" (tap)="selectRestaurant(restaurant)" class="card" margin="10" elevation="40" radius="5">
+        <StackLayout class="card-layout">
+            <Label class="h2" [text]="restaurant.name"></Label>
+        </StackLayout>
+    </CardView>
+</StackLayout>
