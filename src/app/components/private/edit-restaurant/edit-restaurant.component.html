@@ -1,0 +1,74 @@
+<ActionBar title="Edit Profile">
+    <NavigationButton
+            (tap)="onGoBack()"
+            *ngIf="canGoBack"
+            android.systemIcon="ic_menu_back"
+            text="Back"
+    ></NavigationButton>
+</ActionBar>
+
+<StackLayout [formGroup]="form" class="form">
+    <StackLayout class="input-field">
+        <Label
+                [ngClass]="{ invalid: false }"
+                class="label"
+                text="Name"
+        ></Label>
+        <TextField
+                #nameEl
+                [autocorrect]="false"
+                autocapitalizationType="none"
+                class="input"
+                formControlName="name"
+                returnKeyType="next"
+        ></TextField>
+        <Label
+                *ngIf="false"
+                text="Please enter a Name."
+        ></Label>
+    </StackLayout>
+    <StackLayout class="input-field">
+        <Label
+                [ngClass]="{ invalid: false }"
+                class="label"
+                text="Address"
+        ></Label>
+        <TextField
+                #addressEl
+                [autocorrect]="false"
+                autocapitalizationType="none"
+                class="input"
+                formControlName="address"
+                returnKeyType="done"
+        ></TextField>
+        <Label
+                *ngIf="false"
+                text="Please enter a valid Address."
+        ></Label>
+    </StackLayout>
+    <StackLayout class="input-field">
+        <Label
+                [ngClass]="{ invalid: false }"
+                class="label"
+                text="Phone"
+        ></Label>
+        <TextField
+                #phoneEl
+                [autocorrect]="false"
+                autocapitalizationType="none"
+                class="input"
+                formControlName="phone"
+                returnKeyType="done"
+        ></TextField>
+        <Label
+                *ngIf="false"
+                text="Please enter a valid phone number."
+        ></Label>
+    </StackLayout>
+    <Button
+            (tap)="onSubmit()"
+            class="btn btn-primary btn-rounded-lg"
+            text="Confirm Edit"
+    ></Button>
+    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+</StackLayout>

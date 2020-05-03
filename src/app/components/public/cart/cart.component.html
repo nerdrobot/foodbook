@@ -1,14 +1,15 @@
 <ns-action-bar title="Shopping Cart"></ns-action-bar>
 <StackLayout>
-    <StackLayout *ngFor="let item of cart">
-        <CardView class="card" margin="10" elevation="40" radius="5">
+    <StackLayout *ngFor="let item of cartItems; let i = index">
+        <CardView class="card" elevation="40" margin="10" radius="5">
             <StackLayout class="card-layout">
-                <Label class="h2" [text]="item.name + '    ' + (item.price | currency)"></Label>
+                <Label [text]="item.name + '    ' + (item.price | currency)" class="h2"></Label>
+                <Button (tap)="removeItem(i)" [backgroundColor]="red" text="Remove item"></Button>
             </StackLayout>
         </CardView>
     </StackLayout>
     <StackLayout>
-        <CardView class="card" margin="10" elevation="40" radius="5">
+        <CardView class="card" elevation="40" margin="10" radius="5">
             <StackLayout class="card-layout">
                 <Label class="h2" text="Total Price: {{getTotal() | currency}}"></Label>
             </StackLayout>

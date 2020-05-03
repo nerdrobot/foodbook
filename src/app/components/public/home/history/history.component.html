@@ -1,8 +1,8 @@
 <StackLayout>
     <StackLayout *ngFor="let hist of history">
-        <CardView class="card" margin="10" elevation="40" radius="5">
+        <CardView class="card" elevation="40" margin="10" radius="5">
             <StackLayout class="card-layout">
-                <Label class="h2" [text]="hist.name"></Label>
+                <Label [text]="hist.name" class="h2"></Label>
             </StackLayout>
         </CardView>
     </StackLayout>

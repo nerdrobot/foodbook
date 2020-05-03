@@ -6,7 +6,7 @@ import {RouterExtensions} from 'nativescript-angular/router';
 @Component({
     selector: 'ns-search-restaurants',
     templateUrl: './search-restaurants.component.html',
-    styleUrls: ['./search-restaurants.component.css']
+    styleUrls: ['./search-restaurants.component.scss']
 })
 export class SearchRestaurantsComponent implements OnInit, OnDestroy {
 
@@ -17,11 +17,12 @@ export class SearchRestaurantsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.restaurantSubscription = this.restaurantService.get().subscribe((restaurants => this.restaurants = restaurants));
+        this.restaurantSubscription = this.restaurantService.getRestaurant().subscribe((restaurants => this.restaurants = restaurants));
     }
 
     ngOnDestroy(): void {
-        this.restaurantSubscription.unsubscribe();
+        if (this.restaurantSubscription)
+            this.restaurantSubscription.unsubscribe();
     }
 
     selectRestaurant(restaurant) {

@@ -1,0 +1,36 @@
+<ns-action-bar title="Current Orders"></ns-action-bar>
+<!--<StackLayout >
+    <StackLayout *ngFor="let order of orders">
+        <CardView class="card" elevation="40" margin="10" radius="5">
+            <StackLayout class="card-layout">
+                <Label [text]="order.name" class="h2"></Label>
+            </StackLayout>
+        </CardView>
+    </StackLayout>
+</StackLayout>-->
+
+<StackLayout *ngIf="orders">
+    <StackLayout *ngFor="let order of orders; let i = index">
+        <StackLayout>
+            <GridLayout rows="auto, auto" columns="auto,auto,auto,auto">
+                <Label class="p-10" row="0" col="0" text="Order Number"></Label>
+                <Label class="p-10" row="0" col="1" text="{{i}}"></Label>
+                <Label class="p-10" row="0" col="2" text="Order Time"></Label>
+                <Label class="p-10" row="0" col="3" text="{{order.time | date: 'medium'}}"></Label>
+                <Label class="p-10" row="1" col="0" text="Customer Name"></Label>
+                <Label class="p-10" row="1" col="1" colSpan="3" text="{{order.firstName + '         ' +   order.lastName}}"></Label>
+            </GridLayout>
+        </StackLayout>
+        <StackLayout *ngFor="let item of order.items">
+            <GridLayout rows="auto" columns="auto, auto">
+                <Label class="p-10" row="0" col="0" text="Name :"></Label>
+                <Label class="p-10" row="0" col="1" text="{{item.name}}"></Label>
+            </GridLayout>
+        </StackLayout>
+       <StackLayout class="hr"></StackLayout>
+    </StackLayout>
+</StackLayout>
+
+<StackLayout *ngIf="!orders">
+    <Label text="There are no orders available!"></Label>
+</StackLayout>

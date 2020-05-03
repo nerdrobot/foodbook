@@ -1,8 +1,18 @@
 <ns-action-bar title="Select a Restaurant"></ns-action-bar>
 <StackLayout>
-    <CardView *ngFor="let restaurant of restaurants" (tap)="selectRestaurant(restaurant)" class="card" margin="10" elevation="40" radius="5">
-        <StackLayout class="card-layout">
-            <Label class="h2" [text]="restaurant.name"></Label>
-        </StackLayout>
-    </CardView>
+    <GridLayout (tap)="selectRestaurant(restaurant)" *ngFor="let restaurant of restaurants"
+                columns="auto, *"
+                rows="auto, auto, auto, auto">
+        <Label class="p-l-15 p-b-10 m-r-20" col="0" row="0" text="Name"></Label>
+        <Label [text]="restaurant.name" class="p-b-10" col="1" row="0"></Label>
+
+        <Label class="p-l-15 p-b-10 m-r-20" col="0" row="1" text="Address"></Label>
+        <Label [text]="restaurant.address" class="p-b-10" col="1" row="1"></Label>
+
+        <Label class="p-l-15 p-b-10 m-r-20" col="0" row="2" text="Phone"></Label>
+        <Label [text]="restaurant.phone" class="p-b-10" col="1" row="2"></Label>
+        <StackLayout class="hr" col="0" colSpan="2" row="3"></StackLayout>
+        -->
+    </GridLayout>
 </StackLayout>
+

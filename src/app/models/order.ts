@@ -1,8 +1,8 @@
 export class Order {
-    orderNumber;
     items;
     time;
-    orderPersonFirstName;
-    orderPersonSecondName;
-    restaurantName;
+    firstName;
+    lastName;
+    phone;
+    active : boolean;
 }

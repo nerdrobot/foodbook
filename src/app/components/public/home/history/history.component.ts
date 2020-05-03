@@ -3,9 +3,9 @@ import {Subscription} from "rxjs";
 import {OrderService} from "~/app/services/shared/order.service";
 
 @Component({
-  selector: 'ns-history',
-  templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css']
+    selector: 'ns-history',
+    templateUrl: './history.component.html',
+    styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit, OnDestroy {
     history;
@@ -15,7 +15,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.historySubscription =  this.orderService.order.subscribe(order => {
+        this.historySubscription = this.orderService.order.subscribe(order => {
             console.log(order);
             this.history = order
         });

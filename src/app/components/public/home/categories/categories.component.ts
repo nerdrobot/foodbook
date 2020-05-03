@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {RestaurantService} from "~/app/services/shared/restaurant.service";
 import {Subscription} from "rxjs";
+import {RouterExtensions} from "nativescript-angular/router";
 
 @Component({
     selector: 'ns-categories',
@@ -12,7 +13,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     menus: any;
     menuSubscription: Subscription;
 
-    constructor(private restaurantService: RestaurantService) {
+    constructor(private restaurantService: RestaurantService, private router: RouterExtensions) {
     }
 
     ngOnInit(): void {
@@ -24,6 +25,12 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             this.menuSubscription.unsubscribe();
         }
 
+    }
+
+    filter(menu) {
+        this.restaurantService.setFilterCategory(menu.name);
+        console.log('filter menu = ', menu.name);
+        this.router.navigate(['/home/menu'], {clearHistory: true});
     }
 
 }

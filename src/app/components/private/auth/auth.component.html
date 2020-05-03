@@ -1,23 +1,23 @@
 <ns-action-bar
+        [hasMenu]="true"
+        [showBackButton]="true"
         title="Login"
-        [showBackButton]="false"
-        [hasMenu]="false"
 ></ns-action-bar>
-<StackLayout class="form" [formGroup]="form">
+<StackLayout [formGroup]="form" class="form">
     <StackLayout class="input-field">
         <Label
+                [ngClass]="{ invalid: false }"
                 class="label"
                 text="E-Mail"
-                [ngClass]="{ invalid: false }"
         ></Label>
         <TextField
-                class="input"
-                returnKeyType="next"
-                keyboardType="email"
+                #emailEl
                 [autocorrect]="false"
                 autocapitalizationType="none"
+                class="input"
                 formControlName="email"
-                #emailEl
+                keyboardType="email"
+                returnKeyType="next"
         ></TextField>
         <Label
                 *ngIf="false"
@@ -26,19 +26,19 @@
     </StackLayout>
     <StackLayout class="input-field">
         <Label
+                [ngClass]="{ invalid: false }"
                 class="label"
                 text="Password"
-                [ngClass]="{ invalid: false }"
         ></Label>
         <TextField
-                class="input"
-                returnKeyType="done"
-                [autocorrect]="false"
-                autocapitalizationType="none"
-                [secure]="true"
-                hint="Min 6 characters"
-                formControlName="password"
                 #passwordEl
+                [autocorrect]="false"
+                [secure]="true"
+                autocapitalizationType="none"
+                class="input"
+                formControlName="password"
+                hint="Min 6 characters"
+                returnKeyType="done"
         ></TextField>
         <Label
                 *ngIf="false"
@@ -46,8 +46,8 @@
         ></Label>
     </StackLayout>
     <Button
-            text="Login"
-            class="btn btn-primary btn-rounded-lg"
             (tap)="onSubmit()"
+            class="btn btn-primary btn-rounded-lg"
+            text="Login"
     ></Button>
 </StackLayout>

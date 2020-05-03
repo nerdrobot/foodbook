@@ -1,19 +1,19 @@
-const { join, relative, resolve, sep, dirname } = require("path");
+const {join, relative, resolve, sep, dirname} = require("path");
 
 const webpack = require("webpack");
 const nsWebpack = require("nativescript-dev-webpack");
 const nativescriptTarget = require("nativescript-dev-webpack/nativescript-target");
-const { nsReplaceBootstrap } = require("nativescript-dev-webpack/transformers/ns-replace-bootstrap");
-const { nsReplaceLazyLoader } = require("nativescript-dev-webpack/transformers/ns-replace-lazy-loader");
-const { nsSupportHmrNg } = require("nativescript-dev-webpack/transformers/ns-support-hmr-ng");
-const { getMainModulePath } = require("nativescript-dev-webpack/utils/ast-utils");
-const { getNoEmitOnErrorFromTSConfig, getCompilerOptionsFromTSConfig } = require("nativescript-dev-webpack/utils/tsconfig-utils");
+const {nsReplaceBootstrap} = require("nativescript-dev-webpack/transformers/ns-replace-bootstrap");
+const {nsReplaceLazyLoader} = require("nativescript-dev-webpack/transformers/ns-replace-lazy-loader");
+const {nsSupportHmrNg} = require("nativescript-dev-webpack/transformers/ns-support-hmr-ng");
+const {getMainModulePath} = require("nativescript-dev-webpack/utils/ast-utils");
+const {getNoEmitOnErrorFromTSConfig, getCompilerOptionsFromTSConfig} = require("nativescript-dev-webpack/utils/tsconfig-utils");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const { NativeScriptWorkerPlugin } = require("nativescript-worker-loader/NativeScriptWorkerPlugin");
+const {BundleAnalyzerPlugin} = require("webpack-bundle-analyzer");
+const {NativeScriptWorkerPlugin} = require("nativescript-worker-loader/NativeScriptWorkerPlugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const { getAngularCompilerPlugin } = require("nativescript-dev-webpack/plugins/NativeScriptAngularCompilerPlugin");
+const {getAngularCompilerPlugin} = require("nativescript-dev-webpack/plugins/NativeScriptAngularCompilerPlugin");
 const hashSalt = Date.now().toString();
 
 module.exports = env => {
@@ -63,8 +63,8 @@ module.exports = env => {
     const appFullPath = resolve(projectRoot, appPath);
     const tsConfigName = "tsconfig.tns.json";
     const tsConfigPath = join(__dirname, tsConfigName);
-    const hasRootLevelScopedModules = nsWebpack.hasRootLevelScopedModules({ projectDir: projectRoot });
-    const hasRootLevelScopedAngular = nsWebpack.hasRootLevelScopedAngular({ projectDir: projectRoot });
+    const hasRootLevelScopedModules = nsWebpack.hasRootLevelScopedModules({projectDir: projectRoot});
+    const hasRootLevelScopedAngular = nsWebpack.hasRootLevelScopedAngular({projectDir: projectRoot});
     let coreModulesPackageName = "tns-core-modules";
     const alias = env.alias || {};
     alias['~'] = appFullPath;
@@ -73,12 +73,12 @@ module.exports = env => {
     if (hasRootLevelScopedModules) {
         coreModulesPackageName = "@nativescript/core";
         alias["tns-core-modules"] = coreModulesPackageName;
-        nsWebpack.processTsPathsForScopedModules({ compilerOptions });
+        nsWebpack.processTsPathsForScopedModules({compilerOptions});
     }
 
     if (hasRootLevelScopedAngular) {
         alias["nativescript-angular"] = "@nativescript/angular";
-        nsWebpack.processTsPathsForScopedAngular({ compilerOptions });
+        nsWebpack.processTsPathsForScopedAngular({compilerOptions});
     }
 
     const appResourcesFullPath = resolve(projectRoot, appResourcesPath);
@@ -90,7 +90,8 @@ module.exports = env => {
     const areCoreModulesExternal = Array.isArray(env.externals) && env.externals.some(e => e.indexOf("tns-core-modules") > -1);
     if (platform === "ios" && !areCoreModulesExternal) {
         entries["tns_modules/tns-core-modules/inspector_modules"] = "inspector_modules";
-    };
+    }
+    ;
 
     const ngCompilerTransformers = [];
     const additionalLazyModuleResources = [];
@@ -124,7 +125,7 @@ module.exports = env => {
         skipCodeGeneration: !aot,
         sourceMap: !!isAnySourceMapEnabled,
         additionalLazyModuleResources: additionalLazyModuleResources,
-        compilerOptions: { paths: compilerOptions.paths }
+        compilerOptions: {paths: compilerOptions.paths}
     });
 
     let sourceMapFilename = nsWebpack.getSourceMapFilename(hiddenSourceMap, __dirname, dist);
@@ -230,7 +231,7 @@ module.exports = env => {
                         // Require all Android app components
                         platform === "android" && {
                             loader: "nativescript-dev-webpack/android-app-components-loader",
-                            options: { modules: appComponents }
+                            options: {modules: appComponents}
                         },
 
                         {
@@ -247,7 +248,7 @@ module.exports = env => {
                     ].filter(loader => !!loader)
                 },
 
-                { test: /\.html$|\.xml$/, use: "raw-loader" },
+                {test: /\.html$|\.xml$/, use: "raw-loader"},
 
                 {
                     test: /[\/|\\]app\.css$/,
@@ -255,7 +256,7 @@ module.exports = env => {
                         "nativescript-dev-webpack/style-hot-loader",
                         {
                             loader: "nativescript-dev-webpack/css2json-loader",
-                            options: { useForImports: true }
+                            options: {useForImports: true}
                         }
                     ]
                 },
@@ -265,15 +266,19 @@ module.exports = env => {
                         "nativescript-dev-webpack/style-hot-loader",
                         {
                             loader: "nativescript-dev-webpack/css2json-loader",
-                            options: { useForImports: true }
+                            options: {useForImports: true}
                         },
                         "sass-loader"
                     ]
                 },
 
                 // Angular components reference css files and their imports using raw-loader
-                { test: /\.css$/, exclude: /[\/|\\]app\.css$/, use: "raw-loader" },
-                { test: /\.scss$/, exclude: /[\/|\\]app\.scss$/, use: ["raw-loader", "resolve-url-loader", "sass-loader"] },
+                {test: /\.css$/, exclude: /[\/|\\]app\.css$/, use: "raw-loader"},
+                {
+                    test: /\.scss$/,
+                    exclude: /[\/|\\]app\.scss$/,
+                    use: ["raw-loader", "resolve-url-loader", "sass-loader"]
+                },
 
                 {
                     test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
@@ -288,7 +293,7 @@ module.exports = env => {
                 // Removing this will cause deprecation warnings to appear.
                 {
                     test: /[\/\\]@angular[\/\\]core[\/\\].+\.js$/,
-                    parser: { system: true },
+                    parser: {system: true},
                 },
             ],
         },
@@ -299,13 +304,13 @@ module.exports = env => {
                 "process": "global.process",
             }),
             // Remove all files from the out dir.
-            new CleanWebpackPlugin(itemsToClean, { verbose: !!verbose }),
+            new CleanWebpackPlugin(itemsToClean, {verbose: !!verbose}),
             // Copy assets to out dir. Add your own globs as needed.
             new CopyWebpackPlugin([
-                { from: { glob: "fonts/**" } },
-                { from: { glob: "**/*.jpg" } },
-                { from: { glob: "**/*.png" } },
-            ], { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }),
+                {from: {glob: "fonts/**"}},
+                {from: {glob: "**/*.jpg"}},
+                {from: {glob: "**/*.png"}},
+            ], {ignore: [`${relative(appPath, appResourcesFullPath)}/**`]}),
             new nsWebpack.GenerateNativeScriptEntryPointsPlugin("bundle"),
             // For instructions on how to set up workers with webpack
             // check out https://github.com/nativescript/worker-loader

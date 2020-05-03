@@ -1,39 +1,53 @@
 <RadSideDrawer>
-    <FlexboxLayout tkDrawerContent class="drawer-container">
-        <Button
-                text="Home"
+    <FlexboxLayout class="drawer-container" tkDrawerContent>
+        <Button (tap)="toggleDrawer()"
+                *ngIf="publicView"
+                [clearHistory]="true"
                 class="btn"
                 nsRouterLink="/home"
-                [clearHistory]="true"
-                (tap)="onLogout()"
+                text="Home"
         ></Button>
-        <Button
-                text="Search Restaurants"
+        <Button (tap)="toggleDrawer()"
+                *ngIf="publicView"
+                [clearHistory]="true"
                 class="btn"
                 nsRouterLink="/searchRestaurant"
-                [clearHistory]="true"
-                (tap)="onLogout()"
+                text="Search Restaurants"
         ></Button>
-        <Button
-                text="Cart"
+        <Button (tap)="toggleDrawer()"
+                *ngIf="publicView"
+                [clearHistory]="true"
                 class="btn"
-                nsRouterLink="/cart"
-                [clearHistory]="true"
-                (tap)="onLogout()"
+                nsRouterLink="/login"
+                text="Login"
         ></Button>
-        <Button
+        <Button (tap)="toggleDrawer()"
+                *ngIf="!publicView"
+                [clearHistory]="true"
+                class="btn"
+                nsRouterLink="/profile"
+                text="Profile"
+        ></Button>
+        <Button (tap)="toggleDrawer()"
+                *ngIf="!publicView"
+                [clearHistory]="true"
+                class="btn"
+                nsRouterLink="/show-menu"
+                text="Menu"
+        ></Button>
+        <Button (tap)="toggleDrawer();"
+                *ngIf="!publicView"
+                [clearHistory]="true"
+                class="btn"
+                nsRouterLink="/show-order"
+                text="Current Order(s)"
+        ></Button>
+        <Button (tap)="toggleDrawer(); logout();"
+                *ngIf="!publicView"
+                [clearHistory]="true"
+                class="btn"
+                nsRouterLink="/login"
                 text="Logout"
-                class="btn"
-                nsRouterLink="/"
-                [clearHistory]="true"
-                (tap)="onLogout()"
-        ></Button>
-        <Button
-                text="Orders"
-                class="btn"
-                nsRouterLink="/order"
-                [clearHistory]="true"
-                (tap)="onLogout()"
         ></Button>
     </FlexboxLayout>
     <StackLayout tkMainContent>

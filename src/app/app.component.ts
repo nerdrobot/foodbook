@@ -1,14 +1,7 @@
-import {
-    Component,
-    OnInit,
-    OnDestroy,
-    ViewChild,
-    AfterViewInit,
-    ChangeDetectorRef
-} from '@angular/core';
-import { Subscription } from 'rxjs';
-import { RadSideDrawerComponent } from 'nativescript-ui-sidedrawer/angular/side-drawer-directives';
-import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
+import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {RadSideDrawerComponent} from 'nativescript-ui-sidedrawer/angular/side-drawer-directives';
+import {RadSideDrawer} from 'nativescript-ui-sidedrawer';
 import {UIService} from "~/app/services/shared/ui.service";
 
 
@@ -19,14 +12,15 @@ import {UIService} from "~/app/services/shared/ui.service";
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(RadSideDrawerComponent, {static: false}) drawerComponent: RadSideDrawerComponent;
-    activeChallenge = '';
     private drawerSub: Subscription;
     private drawer: RadSideDrawer;
+    private publicView;
 
     constructor(
         private uiService: UIService,
         private changeDetectionRef: ChangeDetectorRef
-    ) {}
+    ) {
+    }
 
     ngOnInit() {
         this.drawerSub = this.uiService.drawerState.subscribe(() => {
@@ -34,20 +28,21 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.drawer.toggleDrawerState();
             }
         });
+        this.uiService.isPublicUser.subscribe(value => {
+            this.publicView = value;
+        })
     }
 
     ngAfterViewInit() {
         this.drawer = this.drawerComponent.sideDrawer;
+        this.uiService.isPublicUser.subscribe(value => {
+            this.publicView = value;
+        })
 
         this.changeDetectionRef.detectChanges();
     }
 
-    onChallengeInput(challengeDescription: string) {
-        this.activeChallenge = challengeDescription;
-        console.log('onChallengeInput: ', challengeDescription);
-    }
-
-    onLogout() {
+    toggleDrawer() {
         this.uiService.toggleDrawer();
     }
 
@@ -55,5 +50,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.drawerSub) {
             this.drawerSub.unsubscribe();
         }
+    }
+
+    logout() {
+        this.uiService.setPublicUserSubject(true);
     }
 }

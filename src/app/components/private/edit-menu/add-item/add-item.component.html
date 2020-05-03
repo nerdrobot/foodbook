@@ -1,0 +1,10 @@
+<StackLayout [formGroup]="form">
+    <GridLayout rows="auto, auto, auto, auto" columns="auto , auto">
+        <Label class="text-center" row="0" col="0" colSpan="2" text="Add Item"></Label>
+        <Label class="p-t-15" row="1" col="0" text="Name:"></Label>
+        <TextField row="1" col="1" formControlName="name" hint="Enter Name ..."></TextField>
+        <Label class="p-t-15" row="2" col="0" text="Price:"></Label>
+        <TextField row="2" col="1" formControlName="price" hint="Enter Price"></TextField>
+        <Button row="3" col="1" colSpan="2" (tap)="onSubmit()" text="Add"></Button>
+    </GridLayout>
+</StackLayout>

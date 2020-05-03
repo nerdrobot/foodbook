@@ -1,10 +1,29 @@
+<StackLayout class="hr c-bg-black"></StackLayout>
+<StackLayout>
+    <SearchBar (clear)="onClear($event)"
+            (submit)="onSubmit($event)"
+            [text]="searchPhrase" hint="Search Menu ..." >
+    </SearchBar>
+</StackLayout>
+<StackLayout class="hr"></StackLayout>
+
 <StackLayout *ngFor="let menu of menus">
     <StackLayout *ngFor="let item of menu.items">
-        <CardView  (tap)="addToCart(item)" class="card" margin="10" elevation="40" radius="5">
-            <StackLayout class="card-layout">
-                <Label class="h2" [text]="item.name + '    ' + (item.price | currency)"></Label>
-            </StackLayout>
-        </CardView>
+        <GridLayout columns="*,*,*,*" rows="auto,auto,auto,auto">
+            <Label col="0" row="0" text="Name:"></Label>
+            <Label [text]="item.name" col="1" row="0"></Label>
+            <Label col="2" row="0" text="Price:"></Label>
+            <Label col="3" row="0" text="Price">
+                <FormattedString>
+                    <Span text="&#36;"></Span>
+                    <Span [text]="item.price"></Span>>
+                </FormattedString>
+            </Label>
+            <Label col="0" row="1" text="Description"></Label>
+            <Label [text]="item.description" col="1" colSpan="3" row="1"></Label>
+            <Button  (onTap)="addToCart(item)" col="3" row="3" text="Add to order"></Button>
+        </GridLayout>
+        <StackLayout class="hr"></StackLayout>
     </StackLayout>
 </StackLayout>
 

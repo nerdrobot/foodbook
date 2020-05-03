@@ -1,0 +1,39 @@
+<ns-action-bar title="Menu">
+    <ActionItem android.position="actionBar">
+        <Label (tap)="addMenu()" android:class="fa p-10" android:fontSize="28"
+               text="&#xf067;"></Label>
+    </ActionItem>
+</ns-action-bar>
+<ScrollView>
+    <StackLayout>
+        <StackLayout *ngFor="let menu of menus; let menuIndex = index">
+            <StackLayout>
+                <GridLayout columns="auto, auto, auto, auto, auto" rows="auto">
+                    <Label col="0" row="0" class="p-10" text="Menu Name: "></Label>
+                    <Label col="1" row="0" class="p-10" text="{{menu.name | uppercase}}"></Label>
+                    <Label (tap)="deleteMenu(menuIndex)" col="2" row="0" android:class="fa p-10" android:fontSize="14"
+                           text="&#xf1f8;"></Label>
+                    <Label (tap)="editMenu(menuIndex)" col="3" row="0" android:class="fa p-10" android:fontSize="14"
+                           text="&#xf044;"></Label>
+                    <Label (tap)="addItem(menuIndex)" col="4" row="0" android:class="fa p-10" android:fontSize="14"
+                           text="&#xf067;"></Label>
+                </GridLayout>
+            </StackLayout>
+            <StackLayout *ngFor="let item of menu.items; let itemIndex = index">
+                <GridLayout rows="auto" columns="*, *, *, *, auto, auto">
+                    <Label class="p-10" text="Name:" col="0"></Label>
+                    <Label class="p-10" text="{{item.name}}" col="1"></Label>
+                    <Label class="p-10" text="Price:" col="2"></Label>
+                    <Label class="p-10" text="{{item.price | currency}}" col="3"></Label>
+                    <Label (tap)="deleteItem(item, itemIndex, menuIndex)" col="4" row="0" android:class="fa p-10"
+                           android:fontSize="14"
+                           text="&#xf1f8;"></Label>
+                    <Label (tap)="editItem(item, itemIndex, menuIndex)" col="5" row="0" android:class="fa p-10"
+                           android:fontSize="14"
+                           text="&#xf044;"></Label>
+                </GridLayout>
+            </StackLayout>
+            <StackLayout class="hr"></StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

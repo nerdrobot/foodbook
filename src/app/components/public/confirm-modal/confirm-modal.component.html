@@ -1,0 +1,13 @@
+<StackLayout>
+    <StackLayout [formGroup]="form">
+        <Label text="Please submit the following information."></Label>
+        <TextField formControlName="firstName" hint="Enter First Name"></TextField>
+        <TextField formControlName="lastName" hint="Enter Last Name"></TextField>
+        <TextField formControlName="phone" hint="Enter Phone Number"></TextField>
+    </StackLayout>
+    <StackLayout>
+        <DatePickerField [(ngModel)]="date" [ngModelOptions]="{standalone: true}" hint="Select date"></DatePickerField>
+        <TimePickerField [(ngModel)]="time" [ngModelOptions]="{standalone: true}" hint="Select time"></TimePickerField>
+        <Button (tap)="onSubmit()" text="Submit"></Button>
+    </StackLayout>
+</StackLayout>

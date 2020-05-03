@@ -1,0 +1,8 @@
+<StackLayout [formGroup]="form">
+    <GridLayout rows="auto, auto" columns="auto, auto">
+        <Label class="text-center" text="Add Menu" row="0" col="0" colSpan="2"></Label>
+        <Label class="p-t-15" text="Menu Name :" row="1" col="0"></Label>
+        <TextField row="1" col="1" formControlName="name" hint="Enter Menu Name ..."></TextField>
+    </GridLayout>
+    <Button (tap)="submit()" text="Add"></Button>
+</StackLayout>

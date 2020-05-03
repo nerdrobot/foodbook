@@ -1,7 +1,9 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RouterExtensions} from 'nativescript-angular/router';
 import {TextField} from 'tns-core-modules/ui/text-field';
+import {AuthService} from "~/app/components/private/auth/auth.service";
+import {UIService} from "~/app/services/shared/ui.service";
 
 @Component({
     selector: 'ns-auth',
@@ -10,12 +12,11 @@ import {TextField} from 'tns-core-modules/ui/text-field';
 })
 export class AuthComponent implements OnInit {
     form: FormGroup;
-    emailControlIsValid = true;
-    passwordControlIsValid = true;
+    isLoading = false;
     @ViewChild('passwordEl', {static: false}) passwordEl: ElementRef<TextField>;
     @ViewChild('emailEl', {static: false}) emailEl: ElementRef<TextField>;
 
-    constructor(private router: RouterExtensions) {
+    constructor(private router: RouterExtensions, private uiService: UIService, private authService: AuthService) {
     }
 
     ngOnInit() {
@@ -31,10 +32,6 @@ export class AuthComponent implements OnInit {
         });
     }
 
-    onSignin() {
-        this.router.navigate(['/today'], {clearHistory: true});
-    }
-
     onSubmit() {
         this.emailEl.nativeElement.focus();
         this.passwordEl.nativeElement.focus();
@@ -42,6 +39,13 @@ export class AuthComponent implements OnInit {
 
         const email = this.form.get('email').value;
         const password = this.form.get('password').value;
-        this.router.navigate(['/searchRestaurant'], {clearHistory: true});
+        this.isLoading = true;
+        this.uiService.setPublicUserSubject(false);
+        this.authService.login(email, password).subscribe(() => {
+            this.isLoading = false;
+            this.router.navigate(['/profile'], {clearHistory: true});
+        }, () => {
+            this.isLoading = false;
+        })
     }
 }

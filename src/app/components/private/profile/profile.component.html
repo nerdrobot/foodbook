@@ -1,0 +1,14 @@
+<ns-action-bar title="Profile">
+    <ActionItem android.position="actionBar" nsRouterLink="/edit-restaurant" pageTransition="slideLeft">
+        <Label android:class="fa p-10" android:fontSize="28"
+               text="&#xf044;"></Label>
+    </ActionItem>
+</ns-action-bar>
+<GridLayout *ngIf="restaurant != null" columns="*, auto" rows="auto, auto, auto">
+    <Label col="0" row="0" text="Name : "></Label>
+    <Label col="1" row="0" text="{{restaurant.name}}"></Label>
+    <Label col="0" row="1" text="Address : "></Label>
+    <Label col="1" row="1" text="{{restaurant.phone}}"></Label>
+    <Label col="0" row="2" text="Phone : "></Label>
+    <Label col="1" row="2" text="{{restaurant.address}}"></Label>
+</GridLayout>
